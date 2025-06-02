@@ -1,0 +1,37 @@
+import pandas as pd
+import random
+
+# Set random seed for reproducibility
+random.seed(42)
+
+# Define ranges for realistic sensor readings
+def generate_row():
+    soil_moisture = random.randint(20, 80)        # %
+    temperature = random.randint(15, 40)           # °C
+    humidity = random.randint(30, 90)              # %
+    nutrient_level = random.randint(1, 5)          # 1 to 5 scale
+
+    # Label logic (basic rules-based approach)
+    if soil_moisture < 35:
+        action = "irrigate"
+    elif nutrient_level < 3:
+        action = "fertilize"
+    else:
+        action = "none"
+
+    return {
+        "soil_moisture": soil_moisture,
+        "temperature": temperature,
+        "humidity": humidity,
+        "nutrient_level": nutrient_level,
+        "action": action
+    }
+
+df = pd.DataFrame([generate_row() for _ in range(200)])
+
+# Save to your desktop
+file_path = r'C:\Users\atpt1\OneDrive\Desktop\New folder\crop.csv'
+df.to_csv(file_path, index=False)
+
+print("CSV file saved successfully!")
+print(df.head())
