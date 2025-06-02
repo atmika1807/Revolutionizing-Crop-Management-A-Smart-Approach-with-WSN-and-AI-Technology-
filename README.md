@@ -1,0 +1,1 @@
+# Revolutionizing-Crop-Management-A-Smart-Approach-with-WSN-and-AI-Technology-
