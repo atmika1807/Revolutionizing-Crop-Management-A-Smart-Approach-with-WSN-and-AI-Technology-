@@ -1,0 +1,84 @@
+import pandas as pd
+import random
+
+# Set seed for reproducibility
+random.seed(42)
+
+# Define crop-specific requirements
+crop_specs = {
+    "Wheat": {
+        "soil_types": ["Loamy", "Clay"],
+        "pH": (6.0, 7.5),
+        "temperature": (15, 25),
+        "moisture": (40, 60),
+        "nutrients": (3, 5)
+    },
+    "Rice": {
+        "soil_types": ["Clay", "Silty"],
+        "pH": (5.0, 6.5),
+        "temperature": (20, 35),
+        "moisture": (50, 80),
+        "nutrients": (4, 5)
+    },
+    "Corn": {
+        "soil_types": ["Loamy", "Sandy"],
+        "pH": (5.5, 7.0),
+        "temperature": (18, 30),
+        "moisture": (35, 55),
+        "nutrients": (3, 5)
+    },
+    "Soybean": {
+        "soil_types": ["Loamy", "Silty"],
+        "pH": (6.0, 7.5),
+        "temperature": (20, 30),
+        "moisture": (40, 60),
+        "nutrients": (3, 4)
+    },
+    "Sugarcane": {
+        "soil_types": ["Loamy", "Peaty"],
+        "pH": (6.5, 7.5),
+        "temperature": (25, 35),
+        "moisture": (50, 70),
+        "nutrients": (4, 5)
+    }
+}
+
+# Function to generate realistic row
+def generate_crop_row():
+    crop_type = random.choice(list(crop_specs.keys()))
+    spec = crop_specs[crop_type]
+
+    soil_type = random.choice(spec["soil_types"])
+    soil_pH = round(random.uniform(*spec["pH"]), 1)
+    temperature = random.randint(*spec["temperature"])
+    soil_moisture = random.randint(*spec["moisture"])
+    nutrient_level = random.randint(*spec["nutrients"])
+    humidity = random.randint(40, 90)  # General range
+
+    # Basic rule-based action
+    if soil_moisture < (spec["moisture"][0] + 5):
+        action = "irrigate"
+    elif nutrient_level < spec["nutrients"][0]:
+        action = "fertilize"
+    else:
+        action = "none"
+
+    return {
+        "crop_type": crop_type,
+        "soil_type": soil_type,
+        "soil_moisture": soil_moisture,
+        "temperature": temperature,
+        "humidity": humidity,
+        "nutrient_level": nutrient_level,
+        "soil_pH": soil_pH,
+        "action": action
+    }
+
+# Generate dataset
+df_crop_realistic = pd.DataFrame([generate_crop_row() for _ in range(200)])
+
+# Save to file
+file_path = r"C:\Users\atpt1\New folder\Revolutionizing Crop Management\crop data.csv"
+df_crop_realistic.to_csv(file_path, index=False)
+
+df_crop_realistic.head()
