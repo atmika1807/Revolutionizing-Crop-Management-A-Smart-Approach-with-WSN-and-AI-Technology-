@@ -1,0 +1,5 @@
+crop_type,soil_type,soil_moisture,temperature,humidity,nutrient_level,soil_pH,predicted_action,timestamp
+Wheat,Clay,50,25,60,1,6.5,Fertilize,2025-06-12 22:45:48
+Wheat,Clay,16,25,60,1,6.5,Fertilize,2025-06-12 22:46:02
+Corn,Clay,16,25,60,1,6.5,Fertilize,2025-06-12 22:46:18
+Corn,Clay,16,25,60,4,6.5,irrigate,2025-06-12 22:46:23
